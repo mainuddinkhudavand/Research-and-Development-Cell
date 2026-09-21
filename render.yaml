@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: rd-cell-tce-gadag
+    env: static
+    buildCommand: npm run build
+    staticPublishPath: ./build
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: REACT_APP_ADMIN_EMAIL
+        value: startupstce@gmail.com
+      - key: REACT_APP_ADMIN_PASSWORD
+        value: Karthik@123
+      - key: REACT_APP_SUPABASE_URL
+        value: https://ksnznrnueryhnaxlrmsd.supabase.co
+      - key: REACT_APP_SUPABASE_ANON_KEY
+        value: sb_publishable_CI28zRDsmWeNAi7CcCJ3yg_iiHb-I6D
