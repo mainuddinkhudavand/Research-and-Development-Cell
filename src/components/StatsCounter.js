@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAdmin } from '../context/AdminContext';
-import { BookOpen, Award, FileText, Calendar, Building2, Layers } from 'lucide-react';
+import { BookOpen, Award, FileText, Calendar, Building2 } from 'lucide-react';
 
 export const StatsCounter = () => {
   const { tabData } = useAdmin();
@@ -10,7 +10,6 @@ export const StatsCounter = () => {
   const iprCount = (tabData?.ipr || []).length;
   const publicationsCount = (tabData?.publications || []).length;
   const eventsCount = (tabData?.events || []).length;
-  const totalCount = movCount + conferenceCount + iprCount + publicationsCount + eventsCount;
 
   return (
     <div className="stats">
@@ -54,14 +53,6 @@ export const StatsCounter = () => {
               <strong>{movCount}</strong>
             </div>
             <span>Active MOUs & MOVs</span>
-          </div>
-
-          <div className="stat">
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '6px' }}>
-              <Layers size={22} color="var(--gold)" />
-              <strong>{totalCount}</strong>
-            </div>
-            <span>Total Uploaded Records</span>
           </div>
         </div>
       </div>
