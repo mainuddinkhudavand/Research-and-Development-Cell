@@ -21,12 +21,12 @@ export const uploadFileToSupabase = async (file) => {
       .from(BUCKET_NAME)
       .upload(filePath, file, {
         cacheControl: '3600',
-        upsert: false
+        upsert: true
       });
 
     if (error) {
       console.error('Supabase storage upload error:', error.message);
-      return null;
+      return { error: error.message };
     }
 
     // Get public URL
@@ -40,7 +40,7 @@ export const uploadFileToSupabase = async (file) => {
     };
   } catch (err) {
     console.error('Failed to upload file to Supabase:', err);
-    return null;
+    return { error: err.message };
   }
 };
 

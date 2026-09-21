@@ -88,6 +88,8 @@ export const AddDocumentModal = () => {
         });
         setUploadProgress(false);
         return;
+      } else if (supaResult && supaResult.error) {
+        console.warn('Supabase storage upload failed, falling back to local reader:', supaResult.error);
       }
     }
 
