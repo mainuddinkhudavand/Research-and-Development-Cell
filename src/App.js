@@ -1,6 +1,5 @@
 import React from 'react';
 import { AdminProvider } from './context/AdminContext';
-import { TopBar } from './components/TopBar';
 import { HeaderNav } from './components/HeaderNav';
 import { Hero } from './components/Hero';
 import { StatsCounter } from './components/StatsCounter';
@@ -21,7 +20,6 @@ function App() {
   return (
     <AdminProvider>
       <div className="app-container">
-        <TopBar />
         <HeaderNav />
         <main>
           <Hero />
