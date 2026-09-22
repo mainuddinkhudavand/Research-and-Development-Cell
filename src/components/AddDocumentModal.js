@@ -142,19 +142,36 @@ export const AddDocumentModal = () => {
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label>Select Target Public Tab</label>
+            <label>Select Target Public Tab / Repository</label>
             <select
               value={tabKey}
               onChange={(e) => setTabKey(e.target.value)}
               disabled={!!editingItem}
             >
-              <option value="mov">MOu (Memorandum of Understanding)</option>
-              <option value="conference">Conference Conducted Details</option>
-              <option value="ipr">Intellectual Property Rights</option>
-              <option value="pub_faculty">Faculty Publications</option>
-              <option value="pub_student">Student Publications</option>
-              <option value="events">Research Events & FDPs</option>
-              <option value="iic_activities">Institution Innovation Council Activities</option>
+              <optgroup label="Central R&D Documentation & Records">
+                <option value="mov">MOu (Memorandum of Understanding)</option>
+                <option value="conference">Conference Conducted Details</option>
+                <option value="ipr">Intellectual Property Rights</option>
+                <option value="pub_faculty">Faculty Publications</option>
+                <option value="pub_student">Student Publications</option>
+                <option value="events">Research Events & FDPs</option>
+                <option value="iic_activities">Institution Innovation Council Activities</option>
+              </optgroup>
+
+              <optgroup label="Research Ecosystem">
+                <option value="researchers">Faculty & Student Researchers Directory</option>
+                <option value="publications">Journal Publications, Books & Chapters</option>
+                <option value="research_support">Research Support & Analytics</option>
+                <option value="research_areas">Research Areas & Thrusts</option>
+              </optgroup>
+
+              <optgroup label="Projects & Funding">
+                <option value="projects">Sponsored Research & Consultancy Projects</option>
+              </optgroup>
+
+              <optgroup label="Resources & Policies">
+                <option value="resources">Institutional Policies, IPR Guidelines & Forms</option>
+              </optgroup>
             </select>
           </div>
 
@@ -448,7 +465,7 @@ export const AddDocumentModal = () => {
             </>
           )}
 
-          {['research_areas', 'researchers', 'research_support', 'real_problems', 'resources', 'iic_activities', 'pub_faculty', 'pub_student'].includes(tabKey) && (
+          {['research_areas', 'researchers', 'research_support', 'real_problems', 'resources', 'iic_activities', 'pub_faculty', 'pub_student', 'projects', 'publications'].includes(tabKey) && (
             <>
               <div className="form-group">
                 <label>Document / Record Title *</label>
