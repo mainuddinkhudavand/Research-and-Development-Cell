@@ -27,12 +27,12 @@ export const Hero = () => {
               <Award size={15} /> View IPR & Patents
             </a>
             <a className="btn ghost" href="#mov">
-              <Users size={15} /> MOUs & Collaborations
+              <Users size={15} /> MOus & Collaborations
             </a>
           </div>
         </div>
         <div className="hero-art">
-          <img src={HERO_ART_IMG} alt="TCE R&D Cell Showcase" />
+          <img src={HERO_ART_IMG} alt="TCE R&D Center Showcase" />
         </div>
       </div>
     </section>

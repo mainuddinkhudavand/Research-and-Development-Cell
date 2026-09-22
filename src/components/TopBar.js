@@ -8,7 +8,7 @@ export const TopBar = () => {
   return (
     <div className="topline">
       <div className="wrap">
-        <span>Research & Development Cell · Tontadarya College of Engineering, Gadag</span>
+        <span>Research & Development Center · Tontadarya College of Engineering, Gadag</span>
         <div className="topline-actions">
           <span style={{ display: 'inline-block' }}>Research · Innovation · IPR · Collaboration · Impact</span>
           {isAdminLoggedIn ? (

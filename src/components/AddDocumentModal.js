@@ -148,11 +148,13 @@ export const AddDocumentModal = () => {
               onChange={(e) => setTabKey(e.target.value)}
               disabled={!!editingItem}
             >
-              <option value="mov">MOV</option>
-              <option value="conference">Conference Details</option>
-              <option value="ipr">Patent Details or IPR</option>
-              <option value="publications">Publications (Faculty / Student)</option>
-              <option value="events">Research Events</option>
+              <option value="mov">MOu (Memorandum of Understanding)</option>
+              <option value="conference">Conference Conducted Details</option>
+              <option value="ipr">Intellectual Property Rights</option>
+              <option value="pub_faculty">Faculty Publications</option>
+              <option value="pub_student">Student Publications</option>
+              <option value="events">Research Events & FDPs</option>
+              <option value="iic_activities">Institution Innovation Council Activities</option>
             </select>
           </div>
 
@@ -160,11 +162,11 @@ export const AddDocumentModal = () => {
           {tabKey === 'mov' && (
             <>
               <div className="form-group">
-                <label>MOU / MOV Title *</label>
+                <label>MOu Title *</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. MOU with TCS for Cloud & AI Research"
+                  placeholder="e.g. MOu with TCS for Cloud & AI Research"
                   value={formData.title || ''}
                   onChange={(e) => handleInputChange('title', e.target.value)}
                 />
@@ -180,6 +182,18 @@ export const AddDocumentModal = () => {
                   />
                 </div>
                 <div className="form-group">
+                  <label>MOu Scope / Level</label>
+                  <select
+                    value={formData.scope || 'National'}
+                    onChange={(e) => handleInputChange('scope', e.target.value)}
+                  >
+                    <option value="International">International</option>
+                    <option value="National">National</option>
+                  </select>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
                   <label>Signing Date</label>
                   <input
                     type="date"
@@ -187,12 +201,21 @@ export const AddDocumentModal = () => {
                     onChange={(e) => handleInputChange('date', e.target.value)}
                   />
                 </div>
+                <div className="form-group">
+                  <label>Category / Industry Sector</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Industry Partnership / IT"
+                    value={formData.category || ''}
+                    onChange={(e) => handleInputChange('category', e.target.value)}
+                  />
+                </div>
               </div>
               <div className="form-group">
                 <label>Summary of Scope / Objectives</label>
                 <textarea
                   rows="3"
-                  placeholder="Briefly describe key objectives of this MOV or MOU..."
+                  placeholder="Briefly describe key objectives of this MOV or MOu..."
                   value={formData.summary || ''}
                   onChange={(e) => handleInputChange('summary', e.target.value)}
                 ></textarea>
@@ -421,6 +444,49 @@ export const AddDocumentModal = () => {
                   value={formData.resourcePerson || ''}
                   onChange={(e) => handleInputChange('resourcePerson', e.target.value)}
                 />
+              </div>
+            </>
+          )}
+
+          {['research_areas', 'researchers', 'research_support', 'real_problems', 'resources', 'iic_activities', 'pub_faculty', 'pub_student'].includes(tabKey) && (
+            <>
+              <div className="form-group">
+                <label>Document / Record Title *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Institutional Research Policy Manual 2026"
+                  value={formData.title || ''}
+                  onChange={(e) => handleInputChange('title', e.target.value)}
+                />
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Category / Department / Partner</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Policy / R&D Center / ECE Dept"
+                    value={formData.category || ''}
+                    onChange={(e) => handleInputChange('category', e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Date</label>
+                  <input
+                    type="date"
+                    value={formData.date || ''}
+                    onChange={(e) => handleInputChange('date', e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <label>Summary / Details</label>
+                <textarea
+                  rows="3"
+                  placeholder="Briefly describe key objectives, scope, or details of this record..."
+                  value={formData.summary || ''}
+                  onChange={(e) => handleInputChange('summary', e.target.value)}
+                ></textarea>
               </div>
             </>
           )}

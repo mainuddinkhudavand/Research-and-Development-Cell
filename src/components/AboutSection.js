@@ -11,7 +11,7 @@ export const AboutSection = () => {
             <h2>From ideas to measurable impact.</h2>
           </div>
           <p className="kicker">
-            The R&D Cell provides an institutional platform for research, intellectual property, innovation, funded projects, consultancy and collaboration at Tontadarya College of Engineering, Gadag.
+            The R&D Center provides an institutional platform for research, intellectual property, innovation, funded projects, consultancy and collaboration at Tontadarya College of Engineering, Gadag.
           </p>
         </div>
 
@@ -19,7 +19,7 @@ export const AboutSection = () => {
           <div>
             <h3>Fostering a Culture of Inquiry</h3>
             <p>
-              Tontadarya College of Engineering (TCE), Gadag is committed to promoting quality research, interdisciplinary innovation and technology translation. The R&D Cell serves faculty members, student innovators and industry partners through structured support across publications, patent disclosures, grant writing and institutional MoUs.
+              Tontadarya College of Engineering (TCE), Gadag is committed to promoting quality research, interdisciplinary innovation and technology translation. The R&D Center serves faculty members, student innovators and industry partners through structured support across publications, patent disclosures, grant writing and institutional MOus.
             </p>
             <ul className="mission">
               <li>
@@ -43,7 +43,7 @@ export const AboutSection = () => {
             <div className="about-photo">
               <img src={ABOUT_EMBLEM} alt="Tontadarya College of Engineering emblem" />
               <p>
-                Tontadarya College of Engineering, Gadag — home to the Research & Development Cell and the Centre for Entrepreneurship Research and Innovation (CERI).
+                Tontadarya College of Engineering, Gadag — home to the Research & Development Center and the Centre for Entrepreneurship Research and Innovation (CERI).
               </p>
             </div>
           </div>
@@ -52,7 +52,7 @@ export const AboutSection = () => {
             <p>
               “Research becomes meaningful when an idea moves beyond the laboratory and creates knowledge, value and impact.”
             </p>
-            <small>Research & Development Cell · TCE, Gadag</small>
+            <small>Research & Development Center · TCE, Gadag</small>
           </div>
         </div>
       </div>

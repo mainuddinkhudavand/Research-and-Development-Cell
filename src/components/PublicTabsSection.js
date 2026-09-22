@@ -15,7 +15,8 @@ import {
   Lock,
   ChevronRight,
   X,
-  Search
+  Search,
+  Globe
 } from 'lucide-react';
 
 export const PublicTabsSection = () => {
@@ -40,10 +41,10 @@ export const PublicTabsSection = () => {
   const tabsConfig = [
     {
       key: 'mov',
-      label: 'MOV',
+      label: 'MOu (Memorandum of Understanding)',
       icon: Building2,
-      tagline: 'MOV & MOUs',
-      desc: 'Academic & Industry MOUs, Verification Reports & Agreements',
+      tagline: 'International & National MOus',
+      desc: 'Academic & Industry MOus, International Partnerships & Verification Reports',
       badgeColor: '#152238',
       logoSvg: (
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,10 +57,10 @@ export const PublicTabsSection = () => {
     },
     {
       key: 'conference',
-      label: 'Conferences',
+      label: 'Conference Conducted Details',
       icon: BookOpen,
-      tagline: 'Proceedings & Seminars',
-      desc: 'National & International Conference Papers, Seminars & Keynotes',
+      tagline: 'Proceedings & Keynotes',
+      desc: 'National & International Conference Papers, Proceedings & Keynote Sessions',
       badgeColor: '#20314D',
       logoSvg: (
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -70,9 +71,9 @@ export const PublicTabsSection = () => {
     },
     {
       key: 'ipr',
-      label: 'Patent Details or IPR',
+      label: 'Intellectual Property Rights',
       icon: Award,
-      tagline: 'Intellectual Property',
+      tagline: 'Patents & IPR',
       desc: 'Patents Filed, Published & Granted with Official Certificates',
       badgeColor: '#C8892F',
       logoSvg: (
@@ -84,17 +85,32 @@ export const PublicTabsSection = () => {
       )
     },
     {
-      key: 'publications',
-      label: 'Publications (Faculty / Student)',
+      key: 'pub_faculty',
+      label: 'Faculty Publications',
       icon: FileText,
       tagline: 'Scopus & WoS Journals',
-      desc: 'Research Papers Published by Faculty & Students in Indexed Journals',
+      desc: 'Research Papers Published by Faculty Members in Indexed Journals',
       badgeColor: '#2E6B57',
       logoSvg: (
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="8" fill="#2E6B57" />
           <path d="M14 12H26V28H14V12Z" stroke="#86EFAC" strokeWidth="2.5" strokeLinejoin="round" />
           <path d="M18 17H22M18 22H22" stroke="#86EFAC" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      )
+    },
+    {
+      key: 'pub_student',
+      label: 'Student Publications',
+      icon: FileText,
+      tagline: 'Student Research Output',
+      desc: 'Research Papers & Articles Published by Undergraduate & Postgraduate Students',
+      badgeColor: '#1E5E4E',
+      logoSvg: (
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <rect width="40" height="40" rx="8" fill="#1E5E4E" />
+          <path d="M14 14L20 10L26 14L20 18L14 14Z" stroke="#A7F3D0" strokeWidth="2" strokeLinejoin="round" />
+          <path d="M16 16.5V23.5C16 25 24 25 24 23.5V16.5" stroke="#A7F3D0" strokeWidth="2" strokeLinecap="round" />
         </svg>
       )
     },
@@ -112,6 +128,20 @@ export const PublicTabsSection = () => {
           <path d="M16 11V14M24 11V14" stroke="#93C5FD" strokeWidth="2" strokeLinecap="round" />
         </svg>
       )
+    },
+    {
+      key: 'iic_activities',
+      label: 'Institution Innovation Council Activities',
+      icon: Award,
+      tagline: 'IIC Challenges & Expos',
+      desc: 'MoE IIC Innovation Challenges, Hackathons, Entrepreneurship Workshops & Activities',
+      badgeColor: '#C0392B',
+      logoSvg: (
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <rect width="40" height="40" rx="8" fill="#C0392B" />
+          <path d="M20 12L23 18L29 19L24.5 23.5L26 29.5L20 26L14 29.5L15.5 23.5L11 19L17 18L20 12Z" stroke="#FECDD3" strokeWidth="2" strokeLinejoin="round" />
+        </svg>
+      )
     }
   ];
 
@@ -120,7 +150,6 @@ export const PublicTabsSection = () => {
 
   // Filter items based on category filter and search
   const filteredItems = items.filter((item) => {
-    // Search query filter
     const matchesSearch =
       !searchQuery ||
       JSON.stringify(item).toLowerCase().includes(searchQuery.toLowerCase());
@@ -128,11 +157,11 @@ export const PublicTabsSection = () => {
     if (!matchesSearch) return false;
 
     if (categoryFilter === 'all') return true;
-    if (openedTabKey === 'publications') {
-      return item.type?.toLowerCase() === categoryFilter.toLowerCase();
+    if (openedTabKey === 'mov') {
+      return (item.scope || 'national').toLowerCase() === categoryFilter.toLowerCase();
     }
     if (openedTabKey === 'ipr') {
-      return item.status?.toLowerCase() === categoryFilter.toLowerCase();
+      return (item.status || '').toLowerCase() === categoryFilter.toLowerCase();
     }
     return true;
   });
@@ -211,7 +240,7 @@ export const PublicTabsSection = () => {
         </p>
       </div>
 
-      {/* 5 Card-Type Tabs Grid */}
+      {/* Card-Type Tabs Grid */}
       <div
         style={{
           display: 'grid',
@@ -264,7 +293,7 @@ export const PublicTabsSection = () => {
                 </span>
               </div>
 
-              <h4 style={{ margin: '0 0 4px', fontSize: '16px', fontFamily: 'Playfair Display, serif', fontWeight: 700, color: 'var(--navy)' }}>
+              <h4 style={{ margin: '0 0 4px', fontSize: '15.5px', fontFamily: 'Playfair Display, serif', fontWeight: 700, color: 'var(--navy)' }}>
                 {tab.label}
               </h4>
               <p style={{ margin: 0, fontSize: '12px', color: 'var(--muted)', lineHeight: '1.45' }}>
@@ -283,7 +312,7 @@ export const PublicTabsSection = () => {
       {/* Modal / Popup View opened when a card tab is clicked */}
       {openedTabObj && (
         <div className="modal-overlay" onClick={handleCloseTabModal}>
-          <div className="modal-card large" onClick={(e) => e.stopPropagation()} style={{ width: 'min(960px, 95%)', maxHeight: '92vh' }}>
+          <div className="modal-card large" onClick={(e) => e.stopPropagation()} style={{ width: 'min(980px, 95%)', maxHeight: '92vh' }}>
             
             {/* Modal Header */}
             <div className="modal-header" style={{ marginBottom: '16px' }}>
@@ -303,7 +332,7 @@ export const PublicTabsSection = () => {
             <div
               style={{
                 display: 'flex',
-                justifyContent: 'space-between',
+                justify: 'space-between',
                 alignItems: 'center',
                 flexWrap: 'wrap',
                 gap: '12px',
@@ -314,7 +343,7 @@ export const PublicTabsSection = () => {
                 border: '1px solid var(--line)'
               }}
             >
-              {/* Search & Filter */}
+              {/* Search & Filters */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                 <div style={{ position: 'relative', width: '220px' }}>
                   <input
@@ -334,16 +363,16 @@ export const PublicTabsSection = () => {
                   <Search size={14} color="var(--muted)" style={{ position: 'absolute', left: '10px', top: '9px' }} />
                 </div>
 
-                {openedTabKey === 'publications' && (
+                {openedTabKey === 'mov' && (
                   <div className="filters-bar" style={{ margin: 0 }}>
                     <button className={`filter-chip ${categoryFilter === 'all' ? 'active' : ''}`} onClick={() => setCategoryFilter('all')}>
-                      All
+                      All MOus
                     </button>
-                    <button className={`filter-chip ${categoryFilter === 'faculty' ? 'active' : ''}`} onClick={() => setCategoryFilter('faculty')}>
-                      Faculty
+                    <button className={`filter-chip ${categoryFilter === 'international' ? 'active' : ''}`} onClick={() => setCategoryFilter('international')}>
+                      International
                     </button>
-                    <button className={`filter-chip ${categoryFilter === 'student' ? 'active' : ''}`} onClick={() => setCategoryFilter('student')}>
-                      Student
+                    <button className={`filter-chip ${categoryFilter === 'national' ? 'active' : ''}`} onClick={() => setCategoryFilter('national')}>
+                      National
                     </button>
                   </div>
                 )}
@@ -375,7 +404,7 @@ export const PublicTabsSection = () => {
               >
                 {isAdminLoggedIn ? (
                   <>
-                    <Plus size={14} /> Upload / Add to {openedTabObj.label}
+                    <Plus size={14} /> Upload / Add Record
                   </>
                 ) : (
                   <>
@@ -391,8 +420,9 @@ export const PublicTabsSection = () => {
                 <thead>
                   {openedTabKey === 'mov' && (
                     <tr>
-                      <th>Title / Scope</th>
+                      <th>Title</th>
                       <th>Partner Organization</th>
+                      <th>Scope / Level</th>
                       <th>Category</th>
                       <th>Signing Date</th>
                       <th>Summary</th>
@@ -422,20 +452,20 @@ export const PublicTabsSection = () => {
                       {isAdminLoggedIn && <th>Admin Actions</th>}
                     </tr>
                   )}
-                  {openedTabKey === 'publications' && (
+                  {(openedTabKey === 'pub_faculty' || openedTabKey === 'pub_student') && (
                     <tr>
                       <th>Paper Title</th>
                       <th>Authors</th>
-                      <th>Type</th>
+                      <th>Category</th>
                       <th>Journal / Publisher</th>
                       <th>Indexing / Year</th>
                       <th>Full Text Attachment</th>
                       {isAdminLoggedIn && <th>Admin Actions</th>}
                     </tr>
                   )}
-                  {openedTabKey === 'events' && (
+                  {(openedTabKey === 'events' || openedTabKey === 'iic_activities') && (
                     <tr>
-                      <th>Event Title</th>
+                      <th>Activity / Event Title</th>
                       <th>Event Type</th>
                       <th>Resource Person(s)</th>
                       <th>Date / Duration</th>
@@ -448,21 +478,33 @@ export const PublicTabsSection = () => {
                 <tbody>
                   {filteredItems.length === 0 ? (
                     <tr>
-                      <td colSpan={isAdminLoggedIn ? 7 : 6} style={{ textAlign: 'center', padding: '40px', color: 'var(--muted)' }}>
-                        No records found in this category. {isAdminLoggedIn ? 'Click "+ Upload / Add" to add one!' : ''}
+                      <td colSpan={isAdminLoggedIn ? 8 : 7} style={{ textAlign: 'center', padding: '40px', color: 'var(--muted)' }}>
+                        No records found in this repository. {isAdminLoggedIn ? 'Click "+ Upload / Add Record" to add one!' : ''}
                       </td>
                     </tr>
                   ) : (
                     filteredItems.map((item) => (
                       <tr key={item.id}>
-                        {/* MOV Row */}
+                        {/* MOU Row */}
                         {openedTabKey === 'mov' && (
                           <>
                             <td style={{ fontWeight: 600, color: 'var(--navy)' }}>{item.title}</td>
                             <td>{item.partner}</td>
                             <td>
+                              <span
+                                className="tag"
+                                style={{
+                                  margin: 0,
+                                  background: item.scope === 'International' ? '#eff6ff' : '#fbf8f1',
+                                  color: item.scope === 'International' ? '#2980b9' : '#c8892f'
+                                }}
+                              >
+                                {item.scope || 'National'}
+                              </span>
+                            </td>
+                            <td>
                               <span className="tag" style={{ margin: 0 }}>
-                                {item.category || 'MOU'}
+                                {item.category || 'MOu'}
                               </span>
                             </td>
                             <td>{item.date}</td>
@@ -532,8 +574,8 @@ export const PublicTabsSection = () => {
                           </>
                         )}
 
-                        {/* Publications Row */}
-                        {openedTabKey === 'publications' && (
+                        {/* Publications Rows */}
+                        {(openedTabKey === 'pub_faculty' || openedTabKey === 'pub_student') && (
                           <>
                             <td style={{ fontWeight: 600, color: 'var(--navy)' }}>{item.title}</td>
                             <td>
@@ -541,7 +583,7 @@ export const PublicTabsSection = () => {
                             </td>
                             <td>
                               <span className="tag" style={{ margin: 0 }}>
-                                {item.type}
+                                {item.type || (openedTabKey === 'pub_faculty' ? 'Faculty' : 'Student')}
                               </span>
                             </td>
                             <td>{item.journal}</td>
@@ -553,13 +595,13 @@ export const PublicTabsSection = () => {
                           </>
                         )}
 
-                        {/* Research Events Row */}
-                        {openedTabKey === 'events' && (
+                        {/* Research Events & IIC Activities Row */}
+                        {(openedTabKey === 'events' || openedTabKey === 'iic_activities') && (
                           <>
                             <td style={{ fontWeight: 600, color: 'var(--navy)' }}>{item.title}</td>
                             <td>
                               <span className="tag" style={{ margin: 0 }}>
-                                {item.eventType}
+                                {item.eventType || 'Activity'}
                               </span>
                             </td>
                             <td>

@@ -2,43 +2,45 @@ export const INITIAL_TAB_DATA = {
   mov: [
     {
       id: 'mov-1',
-      title: 'MOU with Tata Consultancy Services (TCS)',
+      title: 'MOu with Tata Consultancy Services (TCS)',
       partner: 'Tata Consultancy Services, Bengaluru',
       category: 'Industry Partnership',
+      scope: 'National',
       date: '2025-11-15',
       summary: 'Joint research in Artificial Intelligence, Cloud Infrastructure and Machine Learning student internships.',
       fileType: 'pdf',
-      fileName: 'TCS_MOU_Agreement_2025.pdf',
+      fileName: 'TCS_MOu_Agreement_2025.pdf',
       fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
     },
     {
       id: 'mov-2',
-      title: 'Memorandum of Verification with VTU R&D Center',
-      partner: 'Visvesvaraya Technological University, Belagavi',
+      title: 'International Research MOu with University of Malaya',
+      partner: 'University of Malaya, Kuala Lumpur',
       category: 'Academic Research Center',
+      scope: 'International',
       date: '2025-08-10',
-      summary: 'Verification and affiliation recognition for TCE Advanced Materials Research Lab.',
+      summary: 'International faculty exchange, joint research publications, and joint PhD co-supervision.',
       fileType: 'excel',
-      fileName: 'VTU_Verification_Summary.xlsx',
+      fileName: 'International_MOu_Summary.xlsx',
       excelData: {
-        headers: ['Sl No', 'Verification Parameter', 'Status', 'Inspecting Authority', 'Remarks'],
+        headers: ['Sl No', 'MOu Parameter', 'Scope', 'Inspecting Authority', 'Remarks'],
         rows: [
-          ['1', 'Lab Infrastructure & Equipment', 'Approved', 'VTU Committee', 'Complies with Tier-1 Standards'],
-          ['2', 'Faculty Qualification & PhD Ratio', 'Verified', 'VTU BELAGAVI', '85% PhD Holders'],
-          ['3', 'Research Publication Records', 'Approved', 'Academic Audit Cell', 'High Scopus Output'],
-          ['4', 'Safety & Environmental Standards', 'Compliant', 'State Board', 'ISO 9001 Certified']
+          ['1', 'Faculty Exchange & Joint Research', 'International', 'University Senate', 'Active Collaboration'],
+          ['2', 'Joint PhD Co-Supervision', 'International', 'VTU Belagavi', 'Approved'],
+          ['3', 'International Seminars & Keynotes', 'International', 'Research Council', 'Bi-Annual Event']
         ]
       }
     },
     {
       id: 'mov-3',
-      title: 'MOU with Bosch Rexroth India Ltd',
+      title: 'MOu with Bosch Rexroth India Ltd',
       partner: 'Bosch Rexroth Automation, Bengaluru',
       category: 'Industrial Automation',
+      scope: 'National',
       date: '2024-03-20',
       summary: 'Establishment of Center of Excellence in Hydraulics, Pneumatics, and Industrial Robotics.',
       fileType: 'image',
-      fileName: 'Bosch_MOU_Ceremony.jpg',
+      fileName: 'Bosch_MOu_Ceremony.jpg',
       fileUrl: 'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=1000&q=80'
     }
   ],
@@ -135,6 +137,66 @@ export const INITIAL_TAB_DATA = {
     }
   ],
 
+  pub_faculty: [
+    {
+      id: 'pf-1',
+      title: 'Performance Analysis of Deep Neural Networks for Medical Image Classification in Edge Devices',
+      authors: 'Dr. K. G. Vishwanath, Prof. P. S. Pujar',
+      type: 'Faculty',
+      journal: 'IEEE Transactions on Biomedical Engineering',
+      year: '2025',
+      indexing: 'Scopus / WoS Q1 (Impact Factor: 4.8)',
+      fileType: 'pdf',
+      fileName: 'IEEE_DNN_Medical_Classification.pdf',
+      fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+    },
+    {
+      id: 'pf-2',
+      title: 'Experimental Investigation of Natural Fiber Composites for Automotive Structural Components',
+      authors: 'Dr. C. V. Adake, Dr. V. R. Hebbal',
+      type: 'Faculty',
+      journal: 'Journal of Composite Materials & Engineering',
+      year: '2024',
+      indexing: 'Web of Science (WoS)',
+      fileType: 'excel',
+      fileName: 'Faculty_Publication_Metrics_2024.xlsx',
+      excelData: {
+        headers: ['Paper ID', 'Journal Title', 'Volume / Issue', 'Citations', 'Impact Factor'],
+        rows: [
+          ['PUB-2024-01', 'Journal of Composite Materials', 'Vol. 18, Issue 4', '14', '3.6'],
+          ['PUB-2025-01', 'IEEE Trans Biomedical Engg', 'Vol. 72, Issue 1', '8', '4.8']
+        ]
+      }
+    }
+  ],
+
+  pub_student: [
+    {
+      id: 'ps-1',
+      title: 'IoT-Based Smart Water Quality Monitoring System for Rural Water Distribution Networks',
+      authors: 'Anand Kumar (Student), Prof. S. H. Manjunath (Guide)',
+      type: 'Student',
+      journal: 'International Journal of Environmental Technology and Management',
+      year: '2025',
+      indexing: 'Scopus Indexed',
+      fileType: 'pdf',
+      fileName: 'Student_Pub_WaterQuality_2025.pdf',
+      fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+    },
+    {
+      id: 'ps-2',
+      title: 'AI Based Traffic Density Monitoring and Smart Signal Control System',
+      authors: 'Priya Sharma, Rohan Mehta (Final Year B.Tech)',
+      type: 'Student',
+      journal: 'International Journal of Student Research in Engineering',
+      year: '2025',
+      indexing: 'UGC CARE / Peer Reviewed',
+      fileType: 'pdf',
+      fileName: 'Student_AI_Traffic_Paper.pdf',
+      fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+    }
+  ],
+
   publications: [
     {
       id: 'pub-1',
@@ -147,37 +209,6 @@ export const INITIAL_TAB_DATA = {
       fileType: 'pdf',
       fileName: 'IEEE_DNN_Medical_Classification.pdf',
       fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
-    },
-    {
-      id: 'pub-2',
-      title: 'IoT-Based Smart Water Quality Monitoring System for Rural Water Distribution Networks',
-      authors: 'Anand Kumar (Student), Prof. S. H. Manjunath',
-      type: 'Student',
-      journal: 'International Journal of Environmental Technology and Management',
-      year: '2025',
-      indexing: 'Scopus Indexed',
-      fileType: 'pdf',
-      fileName: 'Student_Pub_WaterQuality_2025.pdf',
-      fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
-    },
-    {
-      id: 'pub-3',
-      title: 'Experimental Investigation of Natural Fiber Composites for Automotive Structural Components',
-      authors: 'Dr. C. V. Adake, Mahesh G. (M.Tech Student)',
-      type: 'Joint',
-      journal: 'Journal of Composite Materials & Engineering',
-      year: '2024',
-      indexing: 'Web of Science (WoS)',
-      fileType: 'excel',
-      fileName: 'Publication_Citation_Data_2024.xlsx',
-      excelData: {
-        headers: ['Paper ID', 'Journal Title', 'Volume / Issue', 'Citations', 'Impact Factor'],
-        rows: [
-          ['PUB-2024-01', 'Journal of Composite Materials', 'Vol. 18, Issue 4', '14', '3.6'],
-          ['PUB-2025-01', 'IEEE Trans Biomedical Engg', 'Vol. 72, Issue 1', '8', '4.8'],
-          ['PUB-2025-02', 'Intl Water Quality Journal', 'Vol. 12, Issue 2', '3', '2.1']
-        ]
-      }
     }
   ],
 
@@ -210,17 +241,125 @@ export const INITIAL_TAB_DATA = {
           ['Dr. V. K. Joshi', 'EEE', 'GIT Belagavi', '100%', '96']
         ]
       }
+    }
+  ],
+
+  iic_activities: [
+    {
+      id: 'iic-1',
+      title: 'MoE Institution Innovation Council (IIC 6.0) Innovation & Entrepreneurship Workshop',
+      eventType: 'IIC Workshop',
+      resourcePerson: 'Ministry of Education Innovation Cell (MIC) Officers',
+      date: '2025-11-08',
+      participants: '150 Students & Faculty Innovation Ambassadors',
+      fileType: 'pdf',
+      fileName: 'IIC_Innovation_Workshop_Report.pdf',
+      fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
     },
     {
-      id: 'evt-3',
-      title: 'Student Research Hackathon & Innovation Expo 2025',
-      eventType: 'Symposium / Hackathon',
-      resourcePerson: 'Industry Mentors from KTECH & StartUp Karnataka',
-      date: '2025-04-05',
-      participants: '45 Student Teams (180 Students)',
+      id: 'iic-2',
+      title: 'IIC Student Prototype Competition & Hackathon Winners List',
+      eventType: 'Hackathon',
+      resourcePerson: 'KTECH & Startup Karnataka Mentors',
+      date: '2025-09-25',
+      participants: '30 Teams',
+      fileType: 'excel',
+      fileName: 'IIC_Prototype_Competition_Results.xlsx',
+      excelData: {
+        headers: ['Team ID', 'Project Name', 'Department', 'Prize Amount', 'Status'],
+        rows: [
+          ['IIC-01', 'Smart Agriculture Robot', 'ECE', '₹25,000', '1st Prize - Incubation Selected'],
+          ['IIC-02', 'Eco Brick Interlocking Paver', 'Civil', '₹15,000', '2nd Prize - Patent Filed'],
+          ['IIC-03', 'AI Smart Helmet', 'CSE', '₹10,000', '3rd Prize - Prototype Stage']
+        ]
+      }
+    },
+    {
+      id: 'iic-3',
+      title: 'National Innovation and Start-up Policy (NISP) Launch Event',
+      eventType: 'NISP Session',
+      resourcePerson: 'Regional StartUp Ecosystem Directors',
+      date: '2024-12-10',
+      participants: '200 Attendees',
       fileType: 'image',
-      fileName: 'Innovation_Expo_Winners.jpg',
+      fileName: 'IIC_NISP_Launch_Photo.jpg',
       fileUrl: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80'
+    }
+  ],
+
+  research_areas: [
+    {
+      id: 'ra-1',
+      title: 'Advanced Manufacturing & Automation Research Group',
+      partner: 'Mechanical & Automation Department',
+      category: 'Engineering',
+      date: '2025-05-10',
+      summary: 'Focuses on Industry 4.0, smart CNC machining, digital twin, and additive manufacturing.',
+      fileType: 'pdf',
+      fileName: 'Advanced_Manufacturing_Research_Roadmap.pdf',
+      fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+    }
+  ],
+
+  researchers: [
+    {
+      id: 'res-1',
+      title: 'Faculty Research Profiles & Publication Index 2026',
+      partner: 'TCE Gadag Research Council',
+      category: 'Directory',
+      date: '2026-01-10',
+      summary: 'Complete directory of PhD faculty researchers, ORCID IDs, h-index, and ongoing projects.',
+      fileType: 'excel',
+      fileName: 'Faculty_Researchers_Directory.xlsx',
+      excelData: {
+        headers: ['Faculty Name', 'Designation', 'Department', 'Specialization', 'h-index', 'Contact Email'],
+        rows: [
+          ['Dr. S. B. Kulkarni', 'Professor & Dean R&D', 'ECE', 'AI & Wireless Sensor Networks', '14', 'sbkulkarni@tce.ac.in'],
+          ['Dr. V. R. Hebbal', 'Professor & Head', 'Mechanical', 'Thermal Storage & Composites', '12', 'vrhebbal@tce.ac.in']
+        ]
+      }
+    }
+  ],
+
+  research_support: [
+    {
+      id: 'sup-1',
+      title: 'Research Methodology & Ethics Guidelines Document',
+      partner: 'Institutional Ethics Committee',
+      category: 'Methodology',
+      date: '2025-06-01',
+      summary: 'Guidelines for literature review, experimental design, research ethics, and plagiarism policy.',
+      fileType: 'pdf',
+      fileName: 'Research_Methodology_Ethics_Manual.pdf',
+      fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+    }
+  ],
+
+  real_problems: [
+    {
+      id: 'rp-1',
+      title: 'IoT Agritech Soil Health & Crop Disease Early Detection System',
+      partner: 'District Agriculture Department & Local Farmers',
+      category: 'Applied Tech',
+      date: '2025-11-20',
+      summary: 'Deployment of low-cost soil sensors and AI crop disease detection in Gadag district agricultural fields.',
+      fileType: 'pdf',
+      fileName: 'AgriTech_Field_Deployment_Report.pdf',
+      fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
+    }
+  ],
+
+  resources: [
+    {
+      id: 'res-policy-1',
+      title: 'Institutional Research & Development Policy Manual 2026',
+      partner: 'TCE Management & Governing Council',
+      category: 'Policy',
+      date: '2026-01-01',
+      summary: 'Comprehensive policy governing research incentives, seed funding rules, consultancy division, and conference support.',
+      fileType: 'pdf',
+      fileName: 'TCE_RD_Policy_Manual_2026.pdf',
+      fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
     }
   ]
 };

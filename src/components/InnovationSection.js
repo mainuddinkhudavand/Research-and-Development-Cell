@@ -10,7 +10,7 @@ export const InnovationSection = () => {
             <h2>Ideas into ventures.</h2>
           </div>
           <p className="kicker">
-            Connect the R&D Cell with CERI, IIC, incubation, startup support and entrepreneurship activities.
+            Connect the R&D Center with CERI, IIC, incubation, startup support and entrepreneurship activities.
           </p>
         </div>
 

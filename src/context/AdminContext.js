@@ -45,8 +45,16 @@ export const AdminProvider = ({ children }) => {
             mov: data.mov?.length ? data.mov : INITIAL_TAB_DATA.mov,
             conference: data.conference?.length ? data.conference : INITIAL_TAB_DATA.conference,
             ipr: data.ipr?.length ? data.ipr : INITIAL_TAB_DATA.ipr,
+            pub_faculty: data.pub_faculty?.length ? data.pub_faculty : INITIAL_TAB_DATA.pub_faculty,
+            pub_student: data.pub_student?.length ? data.pub_student : INITIAL_TAB_DATA.pub_student,
             publications: data.publications?.length ? data.publications : INITIAL_TAB_DATA.publications,
-            events: data.events?.length ? data.events : INITIAL_TAB_DATA.events
+            events: data.events?.length ? data.events : INITIAL_TAB_DATA.events,
+            iic_activities: data.iic_activities?.length ? data.iic_activities : INITIAL_TAB_DATA.iic_activities,
+            research_areas: data.research_areas?.length ? data.research_areas : INITIAL_TAB_DATA.research_areas,
+            researchers: data.researchers?.length ? data.researchers : INITIAL_TAB_DATA.researchers,
+            research_support: data.research_support?.length ? data.research_support : INITIAL_TAB_DATA.research_support,
+            real_problems: data.real_problems?.length ? data.real_problems : INITIAL_TAB_DATA.real_problems,
+            resources: data.resources?.length ? data.resources : INITIAL_TAB_DATA.resources
           };
           setTabData(merged);
         }

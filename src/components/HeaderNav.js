@@ -30,7 +30,7 @@ export const HeaderNav = () => {
             <img src={LOGO_EMBLEM} alt="Tontadarya College of Engineering logo" />
           </div>
           <div>
-            <b>Research & Development Cell</b>
+            <b>Research & Development Center</b>
             <span className="brand-sub">Tontadarya College of Engineering · Gadag</span>
           </div>
         </a>
@@ -120,7 +120,7 @@ export const HeaderNav = () => {
                 </div>
                 <div>
                   <b style={{ fontSize: '15px', color: 'var(--navy)', fontFamily: 'Playfair Display, serif', display: 'block', lineHeight: '1.2' }}>
-                    R&D Cell Portal
+                    R&D Center Portal
                   </b>
                   <small style={{ color: 'var(--muted)', fontSize: '11px' }}>
                     TCE Gadag
@@ -141,7 +141,7 @@ export const HeaderNav = () => {
                 <ChevronRight size={16} />
               </a>
               <a href="#about" onClick={closeSidebar} className="sidebar-item">
-                <span>About R&D Cell</span>
+                <span>About R&D Center</span>
                 <ChevronRight size={14} color="var(--muted)" />
               </a>
               <a href="#research" onClick={closeSidebar} className="sidebar-item">
@@ -161,7 +161,7 @@ export const HeaderNav = () => {
                 <ChevronRight size={14} color="var(--muted)" />
               </a>
               <a href="#collab" onClick={closeSidebar} className="sidebar-item">
-                <span>Collaborations & MOUs</span>
+                <span>Collaborations & MOus</span>
                 <ChevronRight size={14} color="var(--muted)" />
               </a>
               <a href="#resources" onClick={closeSidebar} className="sidebar-item">
@@ -169,7 +169,7 @@ export const HeaderNav = () => {
                 <ChevronRight size={14} color="var(--muted)" />
               </a>
               <a href="#contact" onClick={closeSidebar} className="sidebar-item">
-                <span>Contact R&D Cell</span>
+                <span>Contact R&D Center</span>
                 <ChevronRight size={14} color="var(--muted)" />
               </a>
             </nav>

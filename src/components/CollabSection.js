@@ -10,7 +10,7 @@ export const CollabSection = () => {
             <h2>Build the next partnership.</h2>
           </div>
           <p className="kicker">
-            Academic, industry and international partnerships can be presented here with MoUs, focus areas and outcomes.
+            Academic, industry and international partnerships can be presented here with MOus, focus areas and outcomes.
           </p>
         </div>
 
