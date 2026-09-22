@@ -197,20 +197,7 @@ export const INITIAL_TAB_DATA = {
     }
   ],
 
-  publications: [
-    {
-      id: 'pub-1',
-      title: 'Performance Analysis of Deep Neural Networks for Medical Image Classification in Edge Devices',
-      authors: 'Dr. K. G. Vishwanath, Prof. P. S. Pujar',
-      type: 'Faculty',
-      journal: 'IEEE Transactions on Biomedical Engineering',
-      year: '2025',
-      indexing: 'Scopus / WoS Q1 (Impact Factor: 4.8)',
-      fileType: 'pdf',
-      fileName: 'IEEE_DNN_Medical_Classification.pdf',
-      fileUrl: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf'
-    }
-  ],
+  publications: [],
 
   events: [
     {

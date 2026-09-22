@@ -10,8 +10,7 @@ export const StatsCounter = () => {
   const iprCount = (tabData?.ipr || []).length;
   const publicationsCount =
     (tabData?.pub_faculty || []).length +
-    (tabData?.pub_student || []).length +
-    (tabData?.publications || []).length;
+    (tabData?.pub_student || []).length;
   const eventsCount = (tabData?.events || []).length;
 
   return (
