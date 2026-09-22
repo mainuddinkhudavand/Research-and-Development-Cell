@@ -34,7 +34,7 @@ export const ContactFooter = () => {
                 <dt>Vice President - Institute’s Innovation Council</dt>
                 <dd>Prof. Ashok Patil</dd>
 
-                <dt>R & D Students</dt>
+                <dt>R & D Student Coordinators</dt>
                 <dd style={{ lineHeight: '1.6' }}>
                   Sneha Belgumkar<br />
                   Arfa Ahmed<br />

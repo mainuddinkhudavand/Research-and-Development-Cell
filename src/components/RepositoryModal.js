@@ -14,7 +14,7 @@ import {
   FolderCheck
 } from 'lucide-react';
 
-export const RepositoryModal = ({ isOpen, onClose, tabKey, title, desc }) => {
+export const RepositoryModal = ({ isOpen, onClose, tabKey, subKey, title, desc }) => {
   const {
     isAdminLoggedIn,
     tabData,
@@ -52,7 +52,7 @@ export const RepositoryModal = ({ isOpen, onClose, tabKey, title, desc }) => {
       setShowLoginModal(true);
       return;
     }
-    setActiveTabForAdd(tabKey);
+    setActiveTabForAdd(subKey || tabKey);
     setEditingItem(null);
     setShowAddModal(true);
   };
@@ -62,7 +62,7 @@ export const RepositoryModal = ({ isOpen, onClose, tabKey, title, desc }) => {
       setShowLoginModal(true);
       return;
     }
-    setActiveTabForAdd(tabKey);
+    setActiveTabForAdd(subKey || tabKey);
     setEditingItem(item);
     setShowAddModal(true);
   };

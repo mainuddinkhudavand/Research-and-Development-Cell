@@ -28,6 +28,7 @@ export const ProjectsSection = () => {
             onClick={() =>
               setActiveRepo({
                 key: 'real_problems',
+                subKey: 'proj_funded',
                 title: 'Sponsored Funded Projects Repository',
                 desc: 'Government and agency-supported research projects, investigators, funding details, and reports.'
               })
@@ -50,6 +51,7 @@ export const ProjectsSection = () => {
             onClick={() =>
               setActiveRepo({
                 key: 'real_problems',
+                subKey: 'proj_consultancy',
                 title: 'Industry Consultancy Projects Repository',
                 desc: 'Industry-facing engineering studies, testing reports, design, and technical consultancy records.'
               })
@@ -72,6 +74,7 @@ export const ProjectsSection = () => {
             onClick={() =>
               setActiveRepo({
                 key: 'real_problems',
+                subKey: 'proj_major',
                 title: 'Student Major Projects Repository',
                 desc: 'High-potential student projects selected for research, innovation, and IPR development.'
               })
@@ -96,6 +99,7 @@ export const ProjectsSection = () => {
           isOpen={!!activeRepo}
           onClose={() => setActiveRepo(null)}
           tabKey={activeRepo.key}
+          subKey={activeRepo.subKey}
           title={activeRepo.title}
           desc={activeRepo.desc}
         />

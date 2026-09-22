@@ -13,13 +13,109 @@ export const AddDocumentModal = () => {
     saveEntry
   } = useAdmin();
 
-  const [tabKey, setTabKey] = useState(activeTabForAdd || 'mov');
+  const findGroupKey = (key) => {
+    if (!key) return 'central';
+    if (['mov', 'conference', 'ipr', 'pub_faculty', 'pub_student', 'events', 'iic_activities'].includes(key)) return 'central';
+    if (['researchers', 'researchers_faculty', 'researchers_student', 'researchers_scholars'].includes(key)) return 'researchers';
+    if (['publications', 'pub_journal', 'pub_conf_paper', 'pub_books'].includes(key)) return 'publications';
+    if (['research_support', 'supp_methodology', 'supp_analytics', 'supp_guidance'].includes(key)) return 'support';
+    if (['projects', 'real_problems', 'proj_funded', 'proj_consultancy', 'proj_major'].includes(key)) return 'projects';
+    if (['resources', 'res_policy', 'res_ipr_guidelines', 'res_seed_grant', 'res_forms'].includes(key)) return 'resources';
+    return 'central';
+  };
+
+  const DROPDOWN_GROUPS = {
+    central: [
+      { value: 'mov', label: 'MOu (Memorandum of Understanding)' },
+      { value: 'conference', label: 'Conference Conducted Details' },
+      { value: 'ipr', label: 'Intellectual Property Rights' },
+      { value: 'pub_faculty', label: 'Faculty Publications' },
+      { value: 'pub_student', label: 'Student Publications' },
+      { value: 'events', label: 'Research Events' },
+      { value: 'iic_activities', label: 'Institution Innovation Council Activities' }
+    ],
+    researchers: [
+      { value: 'researchers_faculty', label: 'Faculty Researchers' },
+      { value: 'researchers_student', label: 'Student Researchers' },
+      { value: 'researchers_scholars', label: 'Research Scholars' }
+    ],
+    publications: [
+      { value: 'pub_journal', label: 'Journal Publications' },
+      { value: 'pub_conf_paper', label: 'Conference Papers' },
+      { value: 'pub_books', label: 'Books & Chapters' }
+    ],
+    support: [
+      { value: 'supp_methodology', label: 'Research Methodology' },
+      { value: 'supp_analytics', label: 'Data Analysis' },
+      { value: 'supp_guidance', label: 'Publication Guidance' }
+    ],
+    projects: [
+      { value: 'proj_funded', label: 'Funded Projects' },
+      { value: 'proj_consultancy', label: 'Consultancy Projects' },
+      { value: 'proj_major', label: 'Major Projects' }
+    ],
+    resources: [
+      { value: 'res_policy', label: 'Research Policy' },
+      { value: 'res_ipr_guidelines', label: 'IPR Policy & Guidelines' },
+      { value: 'res_seed_grant', label: 'Seed Grant / Project Guidelines' },
+      { value: 'res_forms', label: 'Research Forms' }
+    ]
+  };
+
+  const GROUP_LABEL = {
+    central: 'Central R&D Documentation & Records',
+    researchers: 'Researchers Directory',
+    publications: 'Publications Directory',
+    support: 'Research Support Directory',
+    projects: 'Projects & Funding Directory',
+    resources: 'Resources & Policies Directory'
+  };
+
+  const getStorageKey = (key) => {
+    const map = {
+      researchers_faculty: 'researchers',
+      researchers_student: 'researchers',
+      researchers_scholars: 'researchers',
+      pub_journal: 'publications',
+      pub_conf_paper: 'conference',
+      pub_books: 'publications',
+      supp_methodology: 'research_support',
+      supp_analytics: 'research_support',
+      supp_guidance: 'research_support',
+      proj_funded: 'real_problems',
+      proj_consultancy: 'real_problems',
+      proj_major: 'real_problems',
+      res_policy: 'resources',
+      res_ipr_guidelines: 'resources',
+      res_seed_grant: 'resources',
+      res_forms: 'resources'
+    };
+    return map[key] || key;
+  };
+
+  const currentGroupKey = findGroupKey(activeTabForAdd || tabKey);
+  const availableOptions = DROPDOWN_GROUPS[currentGroupKey] || DROPDOWN_GROUPS.central;
+
+  const [tabKey, setTabKey] = useState(() => {
+    if (activeTabForAdd && availableOptions.some(opt => opt.value === activeTabForAdd)) {
+      return activeTabForAdd;
+    }
+    return availableOptions[0].value;
+  });
   const [formData, setFormData] = useState({});
   const [fileInfo, setFileInfo] = useState({ fileType: 'pdf', fileName: '', fileUrl: '' });
   const [uploadProgress, setUploadProgress] = useState(false);
 
   useEffect(() => {
-    if (activeTabForAdd) setTabKey(activeTabForAdd);
+    if (activeTabForAdd) {
+      const gKey = findGroupKey(activeTabForAdd);
+      const opts = DROPDOWN_GROUPS[gKey] || DROPDOWN_GROUPS.central;
+      if (opts.some(o => o.value === activeTabForAdd)) {
+        setTabKey(activeTabForAdd);
+      } else {
+        setTabKey(opts[0].value);
+      }
+    }
     if (editingItem) {
       setFormData(editingItem);
       setFileInfo({
@@ -124,7 +220,8 @@ export const AddDocumentModal = () => {
       fileUrl: fileInfo.fileUrl
     };
 
-    saveEntry(tabKey, finalEntry);
+    const targetStorageKey = getStorageKey(tabKey);
+    saveEntry(targetStorageKey, finalEntry);
     setShowAddModal(false);
   };
 
@@ -148,29 +245,12 @@ export const AddDocumentModal = () => {
               onChange={(e) => setTabKey(e.target.value)}
               disabled={!!editingItem}
             >
-              <optgroup label="Central R&D Documentation & Records">
-                <option value="mov">MOu (Memorandum of Understanding)</option>
-                <option value="conference">Conference Conducted Details</option>
-                <option value="ipr">Intellectual Property Rights</option>
-                <option value="pub_faculty">Faculty Publications</option>
-                <option value="pub_student">Student Publications</option>
-                <option value="events">Research Events & FDPs</option>
-                <option value="iic_activities">Institution Innovation Council Activities</option>
-              </optgroup>
-
-              <optgroup label="Research Ecosystem">
-                <option value="researchers">Faculty & Student Researchers Directory</option>
-                <option value="publications">Journal Publications, Books & Chapters</option>
-                <option value="research_support">Research Support & Analytics</option>
-                <option value="research_areas">Research Areas & Thrusts</option>
-              </optgroup>
-
-              <optgroup label="Projects & Funding">
-                <option value="projects">Sponsored Research & Consultancy Projects</option>
-              </optgroup>
-
-              <optgroup label="Resources & Policies">
-                <option value="resources">Institutional Policies, IPR Guidelines & Forms</option>
+              <optgroup label={GROUP_LABEL[currentGroupKey] || 'Document Category'}>
+                {availableOptions.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
               </optgroup>
             </select>
           </div>

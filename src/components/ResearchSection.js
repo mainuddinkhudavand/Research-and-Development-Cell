@@ -96,7 +96,7 @@ export const ResearchSection = () => {
           <div className="cards">
             <div
               className="card interactive-card"
-              onClick={() => setActiveRepo({ key: 'researchers', title: 'Faculty Researchers Directory Repository', desc: 'Searchable faculty profiles, expertise, publications, patents and collaboration interests.' })}
+              onClick={() => setActiveRepo({ key: 'researchers', subKey: 'researchers_faculty', title: 'Faculty Researchers Directory Repository', desc: 'Searchable faculty profiles, expertise, publications, patents and collaboration interests.' })}
               style={{ cursor: 'pointer' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -112,7 +112,7 @@ export const ResearchSection = () => {
 
             <div
               className="card interactive-card"
-              onClick={() => setActiveRepo({ key: 'researchers', title: 'Student Researchers & Projects Repository', desc: 'Final-year projects, research internships, innovation teams and project-to-patent initiatives.' })}
+              onClick={() => setActiveRepo({ key: 'researchers', subKey: 'researchers_student', title: 'Student Researchers & Projects Repository', desc: 'Final-year projects, research internships, innovation teams and project-to-patent initiatives.' })}
               style={{ cursor: 'pointer' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -128,7 +128,7 @@ export const ResearchSection = () => {
 
             <div
               className="card interactive-card"
-              onClick={() => setActiveRepo({ key: 'researchers', title: 'Research Scholars Directory Repository', desc: 'Research topics, supervisors and institutional support information.' })}
+              onClick={() => setActiveRepo({ key: 'researchers', subKey: 'researchers_scholars', title: 'Research Scholars Directory Repository', desc: 'Research topics, supervisors and institutional support information.' })}
               style={{ cursor: 'pointer' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -149,7 +149,7 @@ export const ResearchSection = () => {
           <div className="cards">
             <div
               className="card interactive-card"
-              onClick={() => setActiveRepo({ key: 'publications', title: 'Journal Publications Repository', desc: 'Scopus, Web of Science and peer-reviewed journal research outputs.' })}
+              onClick={() => setActiveRepo({ key: 'publications', subKey: 'pub_journal', title: 'Journal Publications Repository', desc: 'Scopus, Web of Science and peer-reviewed journal research outputs.' })}
               style={{ cursor: 'pointer' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -165,7 +165,7 @@ export const ResearchSection = () => {
 
             <div
               className="card interactive-card"
-              onClick={() => setActiveRepo({ key: 'conference', title: 'Conference Papers Repository', desc: 'International and national conference publications and proceedings.' })}
+              onClick={() => setActiveRepo({ key: 'conference', subKey: 'pub_conf_paper', title: 'Conference Papers Repository', desc: 'International and national conference publications and proceedings.' })}
               style={{ cursor: 'pointer' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -181,7 +181,7 @@ export const ResearchSection = () => {
 
             <div
               className="card interactive-card"
-              onClick={() => setActiveRepo({ key: 'publications', title: 'Books & Chapters Repository', desc: 'ISBN books, edited volumes and scholarly book chapters.' })}
+              onClick={() => setActiveRepo({ key: 'publications', subKey: 'pub_books', title: 'Books & Chapters Repository', desc: 'ISBN books, edited volumes and scholarly book chapters.' })}
               style={{ cursor: 'pointer' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -202,7 +202,7 @@ export const ResearchSection = () => {
           <div className="cards">
             <div
               className="card interactive-card"
-              onClick={() => setActiveRepo({ key: 'research_support', title: 'Research Methodology Support Repository', desc: 'Support for research design, literature review, methodology and academic writing.' })}
+              onClick={() => setActiveRepo({ key: 'research_support', subKey: 'supp_methodology', title: 'Research Methodology Support Repository', desc: 'Support for research design, literature review, methodology and academic writing.' })}
               style={{ cursor: 'pointer' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -218,7 +218,7 @@ export const ResearchSection = () => {
 
             <div
               className="card interactive-card"
-              onClick={() => setActiveRepo({ key: 'research_support', title: 'Data Analysis & HPC Repository', desc: 'Statistical and computational analysis workflows and high-performance computing allocations.' })}
+              onClick={() => setActiveRepo({ key: 'research_support', subKey: 'supp_analytics', title: 'Data Analysis & HPC Repository', desc: 'Statistical and computational analysis workflows and high-performance computing allocations.' })}
               style={{ cursor: 'pointer' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -234,7 +234,7 @@ export const ResearchSection = () => {
 
             <div
               className="card interactive-card"
-              onClick={() => setActiveRepo({ key: 'research_support', title: 'Publication Guidance Repository', desc: 'Manuscript preparation, journal selection and research dissemination support.' })}
+              onClick={() => setActiveRepo({ key: 'research_support', subKey: 'supp_guidance', title: 'Publication Guidance Repository', desc: 'Manuscript preparation, journal selection and research dissemination support.' })}
               style={{ cursor: 'pointer' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -257,6 +257,7 @@ export const ResearchSection = () => {
           isOpen={!!activeRepo}
           onClose={() => setActiveRepo(null)}
           tabKey={activeRepo.key}
+          subKey={activeRepo.subKey}
           title={activeRepo.title}
           desc={activeRepo.desc}
         />

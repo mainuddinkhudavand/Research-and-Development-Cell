@@ -28,6 +28,7 @@ export const ResourcesSection = () => {
             onClick={() =>
               setActiveRepo({
                 key: 'resources',
+                subKey: 'res_policy',
                 title: 'Institutional Research Policy Repository',
                 desc: 'Official institutional research policies, rules, and governance manuals.'
               })
@@ -50,6 +51,7 @@ export const ResourcesSection = () => {
             onClick={() =>
               setActiveRepo({
                 key: 'resources',
+                subKey: 'res_ipr_guidelines',
                 title: 'IPR Policy & Guidelines Repository',
                 desc: 'IPR guidelines, patent filing procedure, and commercialization forms.'
               })
@@ -72,6 +74,7 @@ export const ResourcesSection = () => {
             onClick={() =>
               setActiveRepo({
                 key: 'resources',
+                subKey: 'res_seed_grant',
                 title: 'Seed Grant & Project Guidelines Repository',
                 desc: 'Internal seed grant calls, budget templates, and project guidelines.'
               })
@@ -94,6 +97,7 @@ export const ResourcesSection = () => {
             onClick={() =>
               setActiveRepo({
                 key: 'resources',
+                subKey: 'res_forms',
                 title: 'Research Forms & Templates Repository',
                 desc: 'Proposal submission, patent disclosure, consultancy and collaboration forms.'
               })
@@ -118,6 +122,7 @@ export const ResourcesSection = () => {
           isOpen={!!activeRepo}
           onClose={() => setActiveRepo(null)}
           tabKey={activeRepo.key}
+          subKey={activeRepo.subKey}
           title={activeRepo.title}
           desc={activeRepo.desc}
         />
