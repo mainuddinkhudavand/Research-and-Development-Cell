@@ -19,17 +19,32 @@ export const AdminProvider = ({ children }) => {
     return sessionStorage.getItem('rd_admin_logged_in') === 'true';
   });
 
+  // Track permanently deleted item IDs in localStorage so deleted records never reappear on refresh
+  const [deletedIds, setDeletedIds] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('rd_cell_deleted_ids') || '[]');
+    } catch (e) {
+      return [];
+    }
+  });
+
   // Tab data state persisted in localStorage and Supabase
   const [tabData, setTabData] = useState(() => {
     const saved = localStorage.getItem('rd_cell_tab_data');
+    let dataObj = INITIAL_TAB_DATA;
     if (saved) {
       try {
-        return JSON.parse(saved);
+        dataObj = JSON.parse(saved);
       } catch (e) {
         console.error('Failed to parse tab data from localStorage', e);
       }
     }
-    return INITIAL_TAB_DATA;
+    const delList = JSON.parse(localStorage.getItem('rd_cell_deleted_ids') || '[]');
+    const cleaned = {};
+    Object.keys(dataObj).forEach((k) => {
+      cleaned[k] = (dataObj[k] || []).filter((item) => !delList.includes(item.id));
+    });
+    return cleaned;
   });
 
   const [isSupabaseActive, setIsSupabaseActive] = useState(isSupabaseConfigured());
@@ -40,23 +55,27 @@ export const AdminProvider = ({ children }) => {
       setIsSupabaseActive(true);
       fetchTabDataFromSupabase().then((data) => {
         if (data) {
-          // Merge with initial data if empty
-          const merged = {
-            mov: data.mov?.length ? data.mov : INITIAL_TAB_DATA.mov,
-            conference: data.conference?.length ? data.conference : INITIAL_TAB_DATA.conference,
-            ipr: data.ipr?.length ? data.ipr : INITIAL_TAB_DATA.ipr,
-            pub_faculty: data.pub_faculty?.length ? data.pub_faculty : INITIAL_TAB_DATA.pub_faculty,
-            pub_student: data.pub_student?.length ? data.pub_student : INITIAL_TAB_DATA.pub_student,
-            publications: data.publications?.length ? data.publications : INITIAL_TAB_DATA.publications,
-            events: data.events?.length ? data.events : INITIAL_TAB_DATA.events,
-            iic_activities: data.iic_activities?.length ? data.iic_activities : INITIAL_TAB_DATA.iic_activities,
-            research_areas: data.research_areas?.length ? data.research_areas : INITIAL_TAB_DATA.research_areas,
-            researchers: data.researchers?.length ? data.researchers : INITIAL_TAB_DATA.researchers,
-            research_support: data.research_support?.length ? data.research_support : INITIAL_TAB_DATA.research_support,
-            real_problems: data.real_problems?.length ? data.real_problems : INITIAL_TAB_DATA.real_problems,
-            resources: data.resources?.length ? data.resources : INITIAL_TAB_DATA.resources
-          };
-          setTabData(merged);
+          const delList = JSON.parse(localStorage.getItem('rd_cell_deleted_ids') || '[]');
+          setTabData((prev) => {
+            const keys = ['mov', 'conference', 'ipr', 'pub_faculty', 'pub_student', 'publications', 'events', 'iic_activities', 'research_areas', 'researchers', 'research_support', 'real_problems', 'resources'];
+            const merged = { ...prev };
+
+            keys.forEach((key) => {
+              const supaItems = data[key] || [];
+              const localItems = prev[key] || [];
+              // Combine unique items by ID or title
+              const combinedMap = new Map();
+              localItems.forEach((item) => combinedMap.set(item.id, item));
+              supaItems.forEach((item) => {
+                if (!delList.includes(item.id)) {
+                  combinedMap.set(item.id, item);
+                }
+              });
+              merged[key] = Array.from(combinedMap.values()).filter((item) => !delList.includes(item.id));
+            });
+
+            return merged;
+          });
         }
       });
     }
@@ -140,13 +159,25 @@ export const AdminProvider = ({ children }) => {
   const deleteEntry = async (tabKey, itemId) => {
     if (!window.confirm('Are you sure you want to delete this document entry?')) return;
 
-    // 1. Delete from state & localStorage
-    setTabData((prev) => ({
-      ...prev,
-      [tabKey]: (prev[tabKey] || []).filter((item) => item.id !== itemId)
-    }));
+    // 1. Add ID to deletedIds in state & localStorage
+    setDeletedIds((prev) => {
+      const updated = [...new Set([...prev, itemId])];
+      localStorage.setItem('rd_cell_deleted_ids', JSON.stringify(updated));
+      return updated;
+    });
 
-    // 2. Sync to Supabase if active
+    // 2. Delete from state & localStorage
+    setTabData((prev) => {
+      const updatedList = (prev[tabKey] || []).filter((item) => item.id !== itemId);
+      const nextData = {
+        ...prev,
+        [tabKey]: updatedList
+      };
+      localStorage.setItem('rd_cell_tab_data', JSON.stringify(nextData));
+      return nextData;
+    });
+
+    // 3. Sync to Supabase if active
     if (isSupabaseConfigured()) {
       await deleteEntryFromSupabase(itemId);
     }
