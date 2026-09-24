@@ -1,7 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LOGO_EMBLEM } from '../assets/images';
+import { useAdmin } from '../context/AdminContext';
+import { Edit2, Plus, Trash2, X, Lock } from 'lucide-react';
 
 export const ContactFooter = () => {
+  const {
+    isAdminLoggedIn,
+    studentCoordinators,
+    saveStudentCoordinators,
+    setShowLoginModal
+  } = useAdmin();
+
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editedList, setEditedList] = useState([]);
+
+  const handleOpenEdit = () => {
+    if (!isAdminLoggedIn) {
+      setShowLoginModal(true);
+      return;
+    }
+    setEditedList([...(studentCoordinators || [])]);
+    setShowEditModal(true);
+  };
+
+  const handleSave = () => {
+    const cleanList = editedList.map((n) => n.trim()).filter(Boolean);
+    saveStudentCoordinators(cleanList);
+    setShowEditModal(false);
+  };
+
   return (
     <>
       <section id="contact">
@@ -34,13 +61,54 @@ export const ContactFooter = () => {
                 <dt>Vice President - Institute’s Innovation Council</dt>
                 <dd>Prof. Ashok Patil</dd>
 
-                <dt>R & D Student Coordinators</dt>
+                <dt style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px' }}>
+                  <span>R & D Student Coordinators</span>
+                  {isAdminLoggedIn ? (
+                    <button
+                      onClick={handleOpenEdit}
+                      style={{
+                        background: 'rgba(200, 137, 47, 0.15)',
+                        border: '1px solid var(--gold)',
+                        color: 'var(--navy)',
+                        borderRadius: '4px',
+                        padding: '2px 8px',
+                        fontSize: '12px',
+                        fontWeight: 600,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        cursor: 'pointer'
+                      }}
+                      title="Edit Student Coordinators"
+                    >
+                      <Edit2 size={12} /> Edit
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setShowLoginModal(true)}
+                      style={{
+                        background: 'transparent',
+                        border: 'none',
+                        color: 'var(--muted)',
+                        fontSize: '11px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        cursor: 'pointer'
+                      }}
+                      title="Admin Login to Edit"
+                    >
+                      <Lock size={11} /> Admin Edit
+                    </button>
+                  )}
+                </dt>
                 <dd style={{ lineHeight: '1.6' }}>
-                  Sneha Belgumkar<br />
-                  Arfa Ahmed<br />
-                  Mohammed Khalid Kaladagi<br />
-                  Shravankumar Doddamani<br />
-                  Khushi Khatawate
+                  {(studentCoordinators || []).map((name, idx) => (
+                    <React.Fragment key={idx}>
+                      {name}
+                      {idx < studentCoordinators.length - 1 && <br />}
+                    </React.Fragment>
+                  ))}
                 </dd>
 
                 <dt>Email</dt>
@@ -131,6 +199,125 @@ export const ContactFooter = () => {
           </div>
         </div>
       </footer>
+      {showEditModal && (
+        <div className="modal-overlay" onClick={() => setShowEditModal(false)}>
+          <div className="modal-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '480px', width: '92%' }}>
+            <div className="modal-header">
+              <h3 style={{ color: 'var(--navy)', margin: 0, fontSize: '18px' }}>Edit Student Coordinators</h3>
+              <button className="close-btn" onClick={() => setShowEditModal(false)}>
+                <X size={18} />
+              </button>
+            </div>
+
+            <div style={{ padding: '16px 0' }}>
+              <p style={{ fontSize: '13px', color: 'var(--muted)', marginTop: 0, marginBottom: '14px' }}>
+                Manage the names of R&D Student Coordinators displayed in the contact section.
+              </p>
+
+              {editedList.map((name, index) => (
+                <div key={index} style={{ display: 'flex', gap: '8px', marginBottom: '10px', alignItems: 'center' }}>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => {
+                      const newList = [...editedList];
+                      newList[index] = e.target.value;
+                      setEditedList(newList);
+                    }}
+                    placeholder={`Coordinator Name #${index + 1}`}
+                    style={{
+                      flex: 1,
+                      padding: '8px 12px',
+                      borderRadius: '6px',
+                      border: '1px solid var(--line)',
+                      fontSize: '14px',
+                      outline: 'none'
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newList = editedList.filter((_, i) => i !== index);
+                      setEditedList(newList);
+                    }}
+                    style={{
+                      background: '#fee2e2',
+                      border: '1px solid #fca5a5',
+                      color: '#dc2626',
+                      padding: '8px',
+                      borderRadius: '6px',
+                      cursor: 'pointer',
+                      display: 'grid',
+                      placeItems: 'center'
+                    }}
+                    title="Remove Coordinator"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              ))}
+
+              <button
+                type="button"
+                onClick={() => setEditedList([...editedList, ''])}
+                style={{
+                  background: 'var(--cream)',
+                  border: '1px dashed var(--gold)',
+                  color: 'var(--navy)',
+                  width: '100%',
+                  padding: '9px',
+                  borderRadius: '6px',
+                  fontWeight: 600,
+                  fontSize: '13px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  marginTop: '10px',
+                  cursor: 'pointer'
+                }}
+              >
+                <Plus size={16} /> Add Coordinator Name
+              </button>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px', marginTop: '8px', borderTop: '1px solid var(--line)', paddingTop: '12px' }}>
+              <button
+                type="button"
+                onClick={() => setShowEditModal(false)}
+                style={{
+                  background: '#f1f5f9',
+                  color: '#475569',
+                  border: '1px solid #cbd5e1',
+                  padding: '8px 16px',
+                  borderRadius: '6px',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleSave}
+                style={{
+                  background: 'var(--navy)',
+                  color: 'var(--gold2)',
+                  border: '1px solid var(--navy)',
+                  padding: '8px 18px',
+                  borderRadius: '6px',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  cursor: 'pointer'
+                }}
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

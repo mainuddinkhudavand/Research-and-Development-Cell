@@ -88,6 +88,30 @@ export const AdminProvider = ({ children }) => {
   const [editingItem, setEditingItem] = useState(null);
   const [viewingDocument, setViewingDocument] = useState(null);
 
+  const [studentCoordinators, setStudentCoordinators] = useState(() => {
+    const saved = localStorage.getItem('rd_student_coordinators');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch (e) {
+        console.error('Failed to parse studentCoordinators from localStorage', e);
+      }
+    }
+    return [
+      'Sneha Belgumkar',
+      'Arfa Ahmed',
+      'Mohammed Khalid Kaladagi',
+      'Shravankumar Doddamani',
+      'Khushi Khatawate'
+    ];
+  });
+
+  const saveStudentCoordinators = (newList) => {
+    setStudentCoordinators(newList);
+    localStorage.setItem('rd_student_coordinators', JSON.stringify(newList));
+  };
+
   useEffect(() => {
     localStorage.setItem('rd_cell_tab_data', JSON.stringify(tabData));
   }, [tabData]);
@@ -203,7 +227,9 @@ export const AdminProvider = ({ children }) => {
         viewingDocument,
         setViewingDocument,
         ADMIN_EMAIL,
-        isSupabaseActive
+        isSupabaseActive,
+        studentCoordinators,
+        saveStudentCoordinators
       }}
     >
       {children}
