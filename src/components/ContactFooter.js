@@ -194,7 +194,24 @@ export const ContactFooter = () => {
               >
                 Mainuddin Khudavand
               </a>
-              , Pavan Goudar and Sneha Belgumkar
+              ,{' '}
+              <a
+                href="https://www.linkedin.com/in/pavan-ramesh-goudar"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--gold2)', textDecoration: 'underline', fontWeight: 600 }}
+              >
+                Pavan Goudar
+              </a>
+              {' '}and{' '}
+              <a
+                href="https://www.linkedin.com/in/sneha-belgumkar-178851416"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--gold2)', textDecoration: 'underline', fontWeight: 600 }}
+              >
+                Sneha Belgumkar
+              </a>
             </div>
           </div>
         </div>
