@@ -320,7 +320,7 @@ export const AddDocumentModal = () => {
             </>
           )}
 
-          {tabKey === 'conference' && (
+          {(tabKey === 'conference' || tabKey === 'pub_conf_paper') && (
             <>
               <div className="form-group">
                 <label>Paper / Presentation Title *</label>
@@ -441,7 +441,7 @@ export const AddDocumentModal = () => {
             </>
           )}
 
-          {tabKey === 'publications' && (
+          {(tabKey === 'publications' || tabKey === 'pub_journal' || tabKey === 'pub_books') && (
             <>
               <div className="form-group">
                 <label>Research Paper Title *</label>
@@ -545,7 +545,7 @@ export const AddDocumentModal = () => {
             </>
           )}
 
-          {['research_areas', 'researchers', 'research_support', 'real_problems', 'resources', 'iic_activities', 'pub_faculty', 'pub_student', 'projects', 'publications'].includes(tabKey) && (
+          {!['mov', 'conference', 'pub_conf_paper', 'ipr', 'publications', 'pub_journal', 'pub_books', 'events'].includes(tabKey) && (
             <>
               <div className="form-group">
                 <label>Document / Record Title *</label>
