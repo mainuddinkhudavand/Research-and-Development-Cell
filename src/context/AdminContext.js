@@ -98,6 +98,15 @@ export const AdminProvider = ({ children }) => {
         console.error('Failed to parse studentCoordinators from localStorage', e);
       }
     }
+    const tabSaved = localStorage.getItem('rd_cell_tab_data');
+    if (tabSaved) {
+      try {
+        const parsedData = JSON.parse(tabSaved);
+        if (parsedData.student_coordinators && Array.isArray(parsedData.student_coordinators) && parsedData.student_coordinators.length > 0) {
+          return parsedData.student_coordinators;
+        }
+      } catch (e) {}
+    }
     return [
       'Sneha Belgumkar',
       'Arfa Ahmed',
@@ -107,9 +116,68 @@ export const AdminProvider = ({ children }) => {
     ];
   });
 
-  const saveStudentCoordinators = (newList) => {
-    setStudentCoordinators(newList);
-    localStorage.setItem('rd_student_coordinators', JSON.stringify(newList));
+  const saveStudentCoordinators = async (newList) => {
+    const cleanList = Array.isArray(newList) ? newList.map((n) => (typeof n === 'string' ? n.trim() : '')).filter(Boolean) : [];
+    
+    // 1. Update state & localStorage
+    setStudentCoordinators(cleanList);
+    try {
+      localStorage.setItem('rd_student_coordinators', JSON.stringify(cleanList));
+    } catch (e) {
+      console.warn('Failed to save rd_student_coordinators:', e);
+    }
+    
+    // 2. Persist in tabData and rd_cell_tab_data
+    setTabData((prev) => {
+      const existingResearchers = prev.researchers || [];
+      const coordEntry = {
+        id: 'student-coordinators-list',
+        title: 'R & D Student Coordinators Directory',
+        partner: 'R&D Center TCE Gadag',
+        category: 'Student Researcher',
+        type: 'Student',
+        date: new Date().toISOString().split('T')[0],
+        summary: `Active R&D Student Coordinators: ${cleanList.join(', ')}`,
+        fileType: 'pdf',
+        fileName: 'Student_Coordinators_List.pdf'
+      };
+      
+      const updatedResearchers = existingResearchers.some((item) => item.id === coordEntry.id)
+        ? existingResearchers.map((item) => (item.id === coordEntry.id ? coordEntry : item))
+        : [coordEntry, ...existingResearchers];
+
+      const nextData = {
+        ...prev,
+        student_coordinators: cleanList,
+        researchers: updatedResearchers
+      };
+
+      try {
+        localStorage.setItem('rd_cell_tab_data', JSON.stringify(nextData));
+      } catch (e) {
+        console.warn('Failed to save rd_cell_tab_data:', e);
+      }
+      return nextData;
+    });
+
+    // 3. Sync with Supabase if configured
+    if (isSupabaseConfigured()) {
+      try {
+        await saveEntryToSupabase('researchers', {
+          id: 'student-coordinators-list',
+          title: 'R & D Student Coordinators Directory',
+          partner: 'R&D Center TCE Gadag',
+          category: 'Student Researcher',
+          type: 'Student',
+          date: new Date().toISOString().split('T')[0],
+          summary: `Active R&D Student Coordinators: ${cleanList.join(', ')}`,
+          fileType: 'pdf',
+          fileName: 'Student_Coordinators_List.pdf'
+        });
+      } catch (e) {
+        console.warn('Supabase sync warning:', e);
+      }
+    }
   };
 
   useEffect(() => {
